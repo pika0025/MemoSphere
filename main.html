@@ -8,6 +8,63 @@
     <link rel="stylesheet" href="style/style.css">
   </head>
   <body>
+    <!--Formulaire de saisie de fiche-->
+    <form method="get" action="" class="form">
+      <!--Champ de saisie du titre de la fiche-->
+      <label for="titre">Titre</label>
+      <input type="text" name="titre" id="form-titre" required />
+      
+      <!--Champ de saisie de la matière de la fiche-->
+      <label for="matiere">Matiere</label>
+      <input type="text" name="matiere" id="form-matiere" required />
+      
+      <!--Champ de saisie du chapitre de la fiche-->
+      <label for="chapitre">Chapitre</label>
+      <input type="text" name="chapitre" id="form-chapitre" required />
+      
+      <!--Champ de saisie des notions(nom + def) de la fiche-->
+      <label for="notion-nom">Notion nom</label>
+      <input type="text" name="notion-nom" id="form-notion-nom" />
+      <label for="notion-def">Notion def</label>
+      <input type="text" name="notion-def" id="form-notion-def" />
+      <input type="button" value="ajouter" id="ajouter-notion" />
+      
+      <!--Champ de saisie du contenu de la fiche-->
+      <label for="contenu">Contenu</label>
+      <textarea name="contenu" id="form-contenu" required></textarea>
 
+      <!--Champ de saisie des ressources(lien,manuel...) de la fiche-->
+      <label for="ressource">Ressource</label>
+      <textarea name="ressource" id="form-ressource"></textarea>
+
+      <!--Section devoir, permet d'ajouter des devoirs et de mettre en place des rappels-->
+        <label for="text-devoirs">Devoirs</label>
+        <input type="text" name="text-devoirs" id="form-text-devoirs" />
+
+        <label for="date-limite">Date limite</label>
+        <input type="date" name="date-limite" id="form-date-limite-devoir" />
+
+        <label for="rappel-personalise">Rapel personalisé</label>
+        <input type="date" name="rappel-personalise" id="form-rappel-personalise-devoirs"/>
+
+        <label for="rappel-auto">Rappeler 1 jour avant</label>
+        <input type="checkbox" name="rappel-auto" id="form-rappel-auto-devoirs" />
+
+        <input type="button" value="Ajouter devoirs" id="btn-ajouter-devoirs" />
+      
+      <!--Champ de saisie du niveau de comphrénsion actuelle de la fiche-->
+      <label for="nv-comphrension">Niveau de comphrénsion</label>
+      <input type="range" step="1" min="1" max="5" name="nv-comphrension" id="form-nv-comphrension" required />
+      
+      <!--Case important-->
+      <label for="important">Important</label>
+      <input type="checkbox" name="important" id="form-important">
+      
+      <!--Case a revoir-->
+      <label for="a-revoir">A revoir</label>
+      <input type="checkbox" name="a-revoir" id="form-a-revoir">
+
+      <!--btn d'enregistrement de la fiche-->
+      <input type="button" value="Enregistrer" id="btn-enregistrer">
   </body>
 </html>
