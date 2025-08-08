@@ -23,18 +23,24 @@
       <!--Champ de saisie du chapitre de la fiche-->
       <label for="chapitre">Chapitre</label>
       <input type="text" name="chapitre" id="form-chapitre" required />
-      
+
       <!--Champ de saisie de la date-->
       <label for="date">Date</label>
       <input type="date" name="date" id="date">
-      
-      <!--Champ de saisie des notions(nom + def) de la fiche-->
-      <label for="notion-nom">Notion nom</label>
-      <input type="text" name="notion-nom" id="form-notion-nom" />
-      <label for="notion-def">Notion def</label>
-      <input type="text" name="notion-def" id="form-notion-def" />
-      <input type="button" value="ajouter" id="ajouter-notion" />
-      
+      <fieldset class="notion">
+        <legend>Ajouter une notion</legend>
+
+        <label for="nom">Nom</label>
+        <input type="text" name="notion-nom" id="nom" />
+
+        <label for="def">Définition</label>
+        <input type="text" name="notion-def" id="def" />
+
+        <input type="button" value="Ajouter" id="ajouter-notion" />
+      </fieldset>
+
+      <div class="liste-notions"></div>
+
       <!--Champ de saisie du contenu de la fiche-->
       <label for="contenu">Contenu</label>
       <textarea name="contenu" id="form-contenu" required></textarea>
