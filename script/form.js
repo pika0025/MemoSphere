@@ -1,5 +1,4 @@
 //génére la date automatiquement
-document.addEventListener("DOMContentLoaded", () => {
   const date = new Date();
 
   const jour = date.getDate();
@@ -13,13 +12,15 @@ document.addEventListener("DOMContentLoaded", () => {
     champDate.value = valeurDate;
   }
 
+  dateLimiteDevoirs()
+
+  function dateLimiteDevoirs(){
   const champDateLimiteDevoir = document.getElementById(
     "form-date-limite-devoir"
   );
   if (champDateLimiteDevoir) {
     champDateLimiteDevoir.value = `${annee}-${mois}-${String(jour + 1).padStart(2,"0")}`;
-  }
-});
+  }}
 
 // Vérifie si un champ est vide
 function verifierChamp(champ) {
@@ -74,7 +75,7 @@ btnAjouterNotion.addEventListener("click", () => {
 
     verifierChamp(champNom);
     verifierChamp(champDef);
-    afficherMessageErreur(""); // Nettoie l'éventuelle erreur précédente
+    afficherMessageErreur("", "notion"); // Nettoie l'éventuelle erreur précédente
 
     const nom = champNom.value.trim();
     const def = champDef.value.trim();
@@ -93,6 +94,6 @@ btnAjouterNotion.addEventListener("click", () => {
 
     console.log(notion);
   } catch (erreur) {
-    afficherMessageErreur(erreur.message);
+    afficherMessageErreur(erreur.message, "notion");
   }
 });
