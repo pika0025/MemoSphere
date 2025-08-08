@@ -29,17 +29,18 @@ function verifierChamp(champ) {
 }
 
 // Affiche un message d'erreur (ou le retire si vide)
-function afficherMessageErreur(message) {
+function afficherMessageErreur(message, emplacementErreur) {
   let spanMessageErreur = document.getElementById("messageErreur");
+  let emplacement = document.querySelector(`.${emplacementErreur}`);
 
   if (!spanMessageErreur) {
-    const divNotion = document.querySelector(".notion");
     spanMessageErreur = document.createElement("p");
     spanMessageErreur.id = "messageErreur";
     spanMessageErreur.style.color = "red"; // optionnel
-    divNotion.appendChild(spanMessageErreur);
+    emplacement.appendChild(spanMessageErreur);
   }
-
+  
+  emplacement.appendChild(spanMessageErreur);
   spanMessageErreur.textContent = message;
 }
 
