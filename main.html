@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Memosphere</title>
 
-    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/style.css" />
 
     <script src="script/form.js" defer></script>
   </head>
@@ -15,19 +15,19 @@
       <!--Champ de saisie du titre de la fiche-->
       <label for="titre">Titre</label>
       <input type="text" name="titre" id="form-titre" required />
-      
+
       <!--Champ de saisie de la matière de la fiche-->
       <label for="matiere">Matiere</label>
       <input type="text" name="matiere" id="form-matiere" required />
-      
+
       <!--Champ de saisie du chapitre de la fiche-->
       <label for="chapitre">Chapitre</label>
       <input type="text" name="chapitre" id="form-chapitre" required />
 
       <!--Champ de saisie de la date-->
       <label for="date">Date</label>
-      <input type="date" name="date" id="date">
-      
+      <input type="date" name="date" id="date" />
+
       <!--Formulaire de saisie des notion-->
       <fieldset class="notion">
         <legend>Ajouter une notion</legend>
@@ -52,34 +52,39 @@
       <textarea name="ressource" id="form-ressource"></textarea>
 
       <!--Section devoir, permet d'ajouter des devoirs et de mettre en place des rappels-->
-      <label for="text-devoirs">Devoirs</label>
-      <input type="text" name="text-devoirs" id="devoirs" />
+      <fieldset class="devoirs">
+        <legend>Ajouter un devoirs</legend>
 
-      <label for="date-limite">Date limite</label>
-      <input type="date" name="date-limite" id="form-date-limite-devoir" />
+        <label for="text-devoirs">Devoirs</label>
+        <input type="text" name="text-devoirs" id="devoirs" />
 
-      <label for="rappel-personalise">Rapel personalisé</label>
-      <input type="date" name="rappel-personalise" id="form-rappel-personalise-devoirs"/>
+        <label for="date-limite">Date limite</label>
+        <input type="date" name="date-limite" id="form-date-limite-devoir" />
 
-      <label for="rappel-auto">Rappeler 1 jour avant</label>
-      <input type="checkbox" name="rappel-auto" id="form-rappel-auto-devoirs" />
+        <label for="rappel-personalise">Rapel personalisé</label>
+        <input type="date" name="rappel-personalise" id="form-rappel-personalise-devoirs"/>
 
-      <input type="button" value="Ajouter devoirs" id="btn-ajouter-devoirs" />
-      
+        <label for="rappel-auto">Rappeler 1 jour avant</label>
+        <input type="checkbox" name="rappel-auto" id="form-rappel-auto-devoirs" checked/>
+
+        <input type="button" value="Ajouter devoirs" id="btn-ajouter-devoirs" />
+      </fieldset>
+
+      <div class="liste-devoirs">Liste des devoirs</div>
       <!--Champ de saisie du niveau de comphrénsion actuelle de la fiche-->
       <label for="nv-comphrension">Niveau de comphrénsion</label>
       <input type="range" step="1" min="1" max="5" name="nv-comphrension" id="form-nv-comphrension" required />
-      
+
       <!--Case important-->
       <label for="important">Important</label>
-      <input type="checkbox" name="important" id="form-important">
-      
+      <input type="checkbox" name="important" id="form-important" />
+
       <!--Case a revoir-->
       <label for="a-revoir">A revoir</label>
-      <input type="checkbox" name="a-revoir" id="form-a-revoir">
+      <input type="checkbox" name="a-revoir" id="form-a-revoir" />
 
       <!--btn d'enregistrement de la fiche-->
-      <input type="submit" value="Enregistrer" id="btn-enregistrer">
+      <input type="submit" value="Enregistrer" id="btn-enregistrer" />
     </form>
   </body>
 </html>

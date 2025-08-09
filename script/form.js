@@ -38,7 +38,6 @@ function afficherMessageErreur(message, emplacementErreur) {
     spanMessageErreur = document.createElement("p");
     spanMessageErreur.id = "messageErreur";
     spanMessageErreur.style.color = "red"; // optionnel
-    emplacement.appendChild(spanMessageErreur);
   }
   
   emplacement.appendChild(spanMessageErreur);
@@ -95,5 +94,66 @@ btnAjouterNotion.addEventListener("click", () => {
     console.log(notion);
   } catch (erreur) {
     afficherMessageErreur(erreur.message, "notion");
+  }
+});
+
+// Crée un paragraphe affichant un devoirs avec un bouton de suppression
+function creerElementDevoirs(dateLimite, devoirsContent, index) {
+  let [annee,mois, jour] = dateLimite.split("-")
+  let dateLimiteAffiche = `${jour}-${mois}`
+  
+  const paragraphe = document.createElement("p");
+  paragraphe.textContent = `${devoirsContent} a faire pour le ${dateLimiteAffiche} `;
+
+  const boutonSuppression = document.createElement("input");
+  boutonSuppression.type = "button";
+  boutonSuppression.value = "supprimer le devoirs";
+
+  boutonSuppression.addEventListener("click", () => {
+    paragraphe.remove();
+    tableauDevoirs.splice(index, 1);
+    console.log(tableauDevoirs);
+  });
+
+  paragraphe.appendChild(boutonSuppression);
+  return paragraphe;
+}
+
+// Données internes
+const tableauDevoirs = [];
+
+const btnAjouterDevoirs = document.getElementById("btn-ajouter-devoirs");
+btnAjouterDevoirs.addEventListener("click", () => {
+  try {
+    const champDevoirs = document.getElementById("devoirs");
+    const champDateLimite = document.getElementById("form-date-limite-devoir");
+    const champDatePerso = document.getElementById("form-rappel-personalise-devoirs")
+    const btnRappelerDevoirs = document.getElementById("form-rappel-auto-devoirs")
+
+    verifierChamp(champDevoirs);
+    afficherMessageErreur("", "devoirs"); // Nettoie l'éventuelle erreur précédente
+
+    const devoirsContent = champDevoirs.value.trim();
+    const dateLimite = champDateLimite.value.trim();
+    const datePerso = champDatePerso.value.trim();
+    const RappelAutomatique = btnRappelerDevoirs.checked
+
+    // Enregistre le devoirs
+    tableauDevoirs.push({ devoirsContent,dateLimite,datePerso,RappelAutomatique});
+
+    //Crée l'affichage du devoir
+    const listeDevoirs = document.querySelector(".liste-devoirs");
+    const nouveauDevoirs = creerElementDevoirs(dateLimite, devoirsContent, tableauDevoirs.length - 1);
+    listeDevoirs.appendChild(nouveauDevoirs);
+    
+    // Vide les champs
+    champDevoirs.value = "";
+    dateLimiteDevoirs()
+    champDatePerso.value = "";
+    btnRappelerDevoirs.checked = true
+
+    console.log(tableauDevoirs);
+  } catch (erreur) { 
+    afficherMessageErreur(erreur.message, "devoirs");
   }
 });
