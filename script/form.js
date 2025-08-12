@@ -1,3 +1,11 @@
+console.log(window.localStorage.getItem("fiche"));
+console.log(JSON.parse(window.localStorage.getItem("fiche")))
+
+const btn = document.getElementById("t");
+btn.addEventListener("click", () => {
+  window.localStorage.clear();
+});
+
 //génére la date automatiquement
 const date = new Date();
 
@@ -14,6 +22,7 @@ if (champDate) {
 
 dateLimiteDevoirs();
 
+//met la date du champ dateLimiteDevoirs a J+1
 function dateLimiteDevoirs() {
   const champDateLimiteDevoir = document.getElementById(
     "form-date-limite-devoir"
@@ -73,6 +82,7 @@ function afficherElementNotion() {
 // Données internes
 const notion = [];
 
+// Ajout d'un EventListener au btn aujouter notion lui permettant de remplir sa fonction
 const btnAjouterNotion = document.getElementById("ajouter-notion");
 btnAjouterNotion.addEventListener("click", () => {
   try {
@@ -131,6 +141,7 @@ function creerElementDevoirs(dateLimite, devoirsContent, index) {
 // Données internes
 const tableauDevoirs = [];
 
+// Ajout d'un EventListener au btn aujouter devoir lui permettant de remplir sa fonction
 const btnAjouterDevoirs = document.getElementById("btn-ajouter-devoirs");
 btnAjouterDevoirs.addEventListener("click", () => {
   try {
@@ -172,4 +183,33 @@ btnAjouterDevoirs.addEventListener("click", () => {
   } catch (erreur) {
     afficherMessageErreur(erreur.message, "devoirs");
   }
+});
+
+const listeFiche = []
+
+//Enregistrement du formulaire
+const form = document.querySelector(".form");
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const getVal = (id) => document.getElementById(id)?.value.trim() || "";
+  const getCheck = (id) => document.getElementById(id)?.checked || false;
+
+  listeFiche.push({
+    titre: getVal("form-titre"),
+    matiere: getVal("form-matiere"),
+    chapitre: getVal("form-chapitre"),
+    date: document.getElementById("date")?.value || "",
+    notion, // suppose que cette variable existe déjà dans ton code
+    contenu: getVal("form-contenu"),
+    ressource: getVal("form-ressource"),
+    tableauDevoirs, // suppose que cette variable existe déjà aussi
+    nvComprehension: getVal("form-nv-comprehension"),
+    important: getCheck("form-important"),
+    a_revoir: getCheck("form-a-revoir"),
+  });
+
+  window.localStorage.setItem("fiche", JSON.stringify(listeFiche));
+  console.log(JSON.stringify(listeFiche))
+  console.log(listeFiche);
 });
