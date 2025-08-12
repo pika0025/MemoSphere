@@ -1,5 +1,5 @@
 console.log(window.localStorage.getItem("fiche"));
-console.log(JSON.parse(window.localStorage.getItem("fiche")))
+console.log(JSON.parse(window.localStorage.getItem("fiche")));
 
 const btn = document.getElementById("t");
 btn.addEventListener("click", () => {
@@ -113,7 +113,7 @@ btnAjouterNotion.addEventListener("click", () => {
 });
 
 // Crée un paragraphe affichant un devoirs avec un bouton de suppression
-function creerElementDevoirs(dateLimite, devoirsContent, index) {
+function creerElementDevoirs() {
   const listeDevoirs = document.querySelector(".liste-devoirs");
   listeDevoirs.innerHTML = "";
 
@@ -172,7 +172,7 @@ btnAjouterDevoirs.addEventListener("click", () => {
 
     //Crée l'affichage du devoir
     creerElementDevoirs();
-    
+
     // Vide les champs
     champDevoirs.value = "";
     dateLimiteDevoirs();
@@ -185,7 +185,56 @@ btnAjouterDevoirs.addEventListener("click", () => {
   }
 });
 
-const listeFiche = []
+function creerElementFiche() {
+  const listeFiche = document.querySelector(".liste-fiche");
+  listeFiche.innerHTML = "";
+  tableauFiche.sort(function (a, b) {
+        return Date.parse(b.date) - Date.parse(a.date);
+    });
+
+  // Si le tableau est vide, on affiche un message et on arrête la fonction
+  if (tableauFiche.length === 0) {
+    const message = document.createElement("p");
+    message.textContent = "Aucune fiche disponible.";
+    listeFiche.appendChild(message);
+    return;
+  }
+
+  // Sinon, on parcourt les fiches
+  tableauFiche.forEach((n, index) => {
+    // Formatage de la date (AAAA-MM-JJ → JJ-MM-AAAA)
+    let [annee, mois, jour] = n.date.split("-");
+    let dateAffiche = `${jour}-${mois}-${annee}`;
+
+    // Création des éléments
+    const divFiche = document.createElement("div");
+    const titre = document.createElement("h3");
+    titre.textContent = n.titre;
+
+    const paragraphe = document.createElement("p");
+    paragraphe.textContent = `${n.matiere}, ${n.chapitre}, ${dateAffiche}`;
+
+    const boutonSuppression = document.createElement("button");
+    boutonSuppression.textContent = "Supprimer la fiche";
+
+    // Action du bouton de suppression
+    boutonSuppression.addEventListener("click", () => {
+      tableauFiche.splice(index, 1);
+      window.localStorage.setItem("fiche", JSON.stringify(tableauFiche));
+      console.log(tableauFiche);
+      creerElementFiche();
+    });
+
+    // Ajout dans le DOM
+    listeFiche.appendChild(divFiche);
+    divFiche.appendChild(titre);
+    divFiche.appendChild(paragraphe);
+    paragraphe.appendChild(boutonSuppression);
+  });
+}
+const tableauFiche = JSON.parse(window.localStorage.getItem("fiche")) || [];
+
+creerElementFiche();
 
 //Enregistrement du formulaire
 const form = document.querySelector(".form");
@@ -195,7 +244,7 @@ form.addEventListener("submit", (event) => {
   const getVal = (id) => document.getElementById(id)?.value.trim() || "";
   const getCheck = (id) => document.getElementById(id)?.checked || false;
 
-  listeFiche.push({
+  tableauFiche.push({
     titre: getVal("form-titre"),
     matiere: getVal("form-matiere"),
     chapitre: getVal("form-chapitre"),
@@ -209,7 +258,8 @@ form.addEventListener("submit", (event) => {
     a_revoir: getCheck("form-a-revoir"),
   });
 
-  window.localStorage.setItem("fiche", JSON.stringify(listeFiche));
-  console.log(JSON.stringify(listeFiche))
-  console.log(listeFiche);
+  window.localStorage.setItem("fiche", JSON.stringify(tableauFiche));
+  creerElementFiche();
+  console.log(JSON.stringify(tableauFiche));
+  console.log(tableauFiche);
 });
