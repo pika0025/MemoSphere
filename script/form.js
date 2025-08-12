@@ -1,26 +1,30 @@
 //génére la date automatiquement
-  const date = new Date();
+const date = new Date();
 
-  const jour = date.getDate();
-  const mois = String(date.getMonth() + 1).padStart(2, "0"); // Janvier = 0 → donc +1
-  const annee = date.getFullYear();
+const jour = date.getDate();
+const mois = String(date.getMonth() + 1).padStart(2, "0"); // Janvier = 0 → donc +1
+const annee = date.getFullYear();
 
-  const valeurDate = `${annee}-${mois}-${String(jour).padStart(2, "0")}`; // Format ISO pour input[type="date"]
+const valeurDate = `${annee}-${mois}-${String(jour).padStart(2, "0")}`; // Format ISO pour input[type="date"]
 
-  const champDate = document.getElementById("date");
-  if (champDate) {
-    champDate.value = valeurDate;
-  }
+const champDate = document.getElementById("date");
+if (champDate) {
+  champDate.value = valeurDate;
+}
 
-  dateLimiteDevoirs()
+dateLimiteDevoirs();
 
-  function dateLimiteDevoirs(){
+function dateLimiteDevoirs() {
   const champDateLimiteDevoir = document.getElementById(
     "form-date-limite-devoir"
   );
   if (champDateLimiteDevoir) {
-    champDateLimiteDevoir.value = `${annee}-${mois}-${String(jour + 1).padStart(2,"0")}`;
-  }}
+    champDateLimiteDevoir.value = `${annee}-${mois}-${String(jour + 1).padStart(
+      2,
+      "0"
+    )}`;
+  }
+}
 
 // Vérifie si un champ est vide
 function verifierChamp(champ) {
@@ -39,28 +43,31 @@ function afficherMessageErreur(message, emplacementErreur) {
     spanMessageErreur.id = "messageErreur";
     spanMessageErreur.style.color = "red"; // optionnel
   }
-  
+
   emplacement.appendChild(spanMessageErreur);
   spanMessageErreur.textContent = message;
 }
 
 // Crée un paragraphe affichant une notion avec un bouton de suppression
-function creerElementNotion(nom, def, index) {
-  const paragraphe = document.createElement("p");
-  paragraphe.textContent = `${nom} : ${def} `;
+function afficherElementNotion() {
+  const listeNotion = document.querySelector(".liste-notions");
+  listeNotion.innerHTML = "";
 
-  const boutonSuppression = document.createElement("input");
-  boutonSuppression.type = "button";
-  boutonSuppression.value = "supprimer la notion";
+  notion.forEach((n, index) => {
+    const paragraphe = document.createElement("p");
+    paragraphe.textContent = `${n.nom} : ${n.def} `;
 
-  boutonSuppression.addEventListener("click", () => {
-    paragraphe.remove();
-    notion.splice(index, 1);
-    console.log(notion);
+    const btnSuppression = document.createElement("button");
+    btnSuppression.textContent = "supprimer la notion";
+    btnSuppression.addEventListener("click", () => {
+      notion.splice(index, 1);
+      console.log(notion);
+      afficherElementNotion();
+    });
+
+    listeNotion.appendChild(paragraphe);
+    paragraphe.appendChild(btnSuppression);
   });
-
-  paragraphe.appendChild(boutonSuppression);
-  return paragraphe;
 }
 
 // Données internes
@@ -83,9 +90,7 @@ btnAjouterNotion.addEventListener("click", () => {
     notion.push({ nom, def });
 
     // Crée l'affichage de la notion
-    const listeNotion = document.querySelector(".liste-notions");
-    const nouvelleNotion = creerElementNotion(nom, def, notion.length - 1);
-    listeNotion.appendChild(nouvelleNotion);
+    afficherElementNotion();
 
     // Vide les champs
     champNom.value = "";
@@ -99,24 +104,28 @@ btnAjouterNotion.addEventListener("click", () => {
 
 // Crée un paragraphe affichant un devoirs avec un bouton de suppression
 function creerElementDevoirs(dateLimite, devoirsContent, index) {
-  let [annee,mois, jour] = dateLimite.split("-")
-  let dateLimiteAffiche = `${jour}-${mois}`
-  
-  const paragraphe = document.createElement("p");
-  paragraphe.textContent = `${devoirsContent} a faire pour le ${dateLimiteAffiche} `;
+  const listeDevoirs = document.querySelector(".liste-devoirs");
+  listeDevoirs.innerHTML = "";
 
-  const boutonSuppression = document.createElement("input");
-  boutonSuppression.type = "button";
-  boutonSuppression.value = "supprimer le devoirs";
+  tableauDevoirs.forEach((n, index) => {
+    let [annee, mois, jour] = n.dateLimite.split("-");
+    let dateLimiteAffiche = `${jour}-${mois}`;
 
-  boutonSuppression.addEventListener("click", () => {
-    paragraphe.remove();
-    tableauDevoirs.splice(index, 1);
-    console.log(tableauDevoirs);
+    const paragraphe = document.createElement("p");
+    paragraphe.textContent = `${n.devoirsContent} a faire pour le ${dateLimiteAffiche} `;
+
+    const boutonSuppression = document.createElement("button");
+    boutonSuppression.textContent = "supprimer le devoirs";
+
+    boutonSuppression.addEventListener("click", () => {
+      tableauDevoirs.splice(index, 1);
+      console.log(tableauDevoirs);
+      creerElementDevoirs();
+    });
+
+    listeDevoirs.appendChild(paragraphe);
+    paragraphe.appendChild(boutonSuppression);
   });
-
-  paragraphe.appendChild(boutonSuppression);
-  return paragraphe;
 }
 
 // Données internes
@@ -127,8 +136,12 @@ btnAjouterDevoirs.addEventListener("click", () => {
   try {
     const champDevoirs = document.getElementById("devoirs");
     const champDateLimite = document.getElementById("form-date-limite-devoir");
-    const champDatePerso = document.getElementById("form-rappel-personalise-devoirs")
-    const btnRappelerDevoirs = document.getElementById("form-rappel-auto-devoirs")
+    const champDatePerso = document.getElementById(
+      "form-rappel-personalise-devoirs"
+    );
+    const btnRappelerDevoirs = document.getElementById(
+      "form-rappel-auto-devoirs"
+    );
 
     verifierChamp(champDevoirs);
     afficherMessageErreur("", "devoirs"); // Nettoie l'éventuelle erreur précédente
@@ -136,24 +149,27 @@ btnAjouterDevoirs.addEventListener("click", () => {
     const devoirsContent = champDevoirs.value.trim();
     const dateLimite = champDateLimite.value.trim();
     const datePerso = champDatePerso.value.trim();
-    const RappelAutomatique = btnRappelerDevoirs.checked
+    const RappelAutomatique = btnRappelerDevoirs.checked;
 
     // Enregistre le devoirs
-    tableauDevoirs.push({ devoirsContent,dateLimite,datePerso,RappelAutomatique});
+    tableauDevoirs.push({
+      devoirsContent,
+      dateLimite,
+      datePerso,
+      RappelAutomatique,
+    });
 
     //Crée l'affichage du devoir
-    const listeDevoirs = document.querySelector(".liste-devoirs");
-    const nouveauDevoirs = creerElementDevoirs(dateLimite, devoirsContent, tableauDevoirs.length - 1);
-    listeDevoirs.appendChild(nouveauDevoirs);
+    creerElementDevoirs();
     
     // Vide les champs
     champDevoirs.value = "";
-    dateLimiteDevoirs()
+    dateLimiteDevoirs();
     champDatePerso.value = "";
-    btnRappelerDevoirs.checked = true
+    btnRappelerDevoirs.checked = true;
 
     console.log(tableauDevoirs);
-  } catch (erreur) { 
+  } catch (erreur) {
     afficherMessageErreur(erreur.message, "devoirs");
   }
 });
