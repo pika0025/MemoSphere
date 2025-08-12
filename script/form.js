@@ -185,6 +185,7 @@ btnAjouterDevoirs.addEventListener("click", () => {
   }
 });
 
+// Affichage des fiches stockés dans LocalStorage
 function creerElementFiche() {
   const listeFiche = document.querySelector(".liste-fiche");
   listeFiche.innerHTML = "";
@@ -232,6 +233,7 @@ function creerElementFiche() {
     paragraphe.appendChild(boutonSuppression);
   });
 }
+
 const tableauFiche = JSON.parse(window.localStorage.getItem("fiche")) || [];
 
 creerElementFiche();
