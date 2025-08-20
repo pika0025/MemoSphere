@@ -7,84 +7,136 @@
 
     <link rel="stylesheet" href="style/style.css" />
 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
     <script src="script/form.js" defer></script>
   </head>
   <body>
-    <!--Formulaire de saisie de fiche-->
-    <form method="get" action="" class="form">
-      <!--Champ de saisie du titre de la fiche-->
-      <label for="titre">Titre</label>
-      <input type="text" name="titre" id="form-titre" required />
+    <header>
+      <h1>Mémosphère</h1>
+      <h2>La sphère du savoir</h2>
+      <a href="main.html">Menu</a>
+    </header>
+    <main>
+      <!--Formulaire de saisie de fiche-->
+      <form method="get" action="" class="form">
+        <!--Champ de saisie du titre de la fiche-->
+        <label for="titre">Titre</label>
+        <input type="text" name="titre" id="form-titre" required />
 
-      <!--Champ de saisie de la matière de la fiche-->
-      <label for="matiere">Matiere</label>
-      <input type="text" name="matiere" id="form-matiere" required />
+        <!--Champ de saisie de la matière de la fiche-->
+        <label for="matiere">Matiere</label>
+        <input type="text" name="matiere" id="form-matiere" required />
 
-      <!--Champ de saisie du chapitre de la fiche-->
-      <label for="chapitre">Chapitre</label>
-      <input type="text" name="chapitre" id="form-chapitre" required />
+        <!--Champ de saisie du chapitre de la fiche-->
+        <label for="chapitre">Chapitre</label>
+        <input type="text" name="chapitre" id="form-chapitre" required />
 
-      <!--Champ de saisie de la date-->
-      <label for="date">Date</label>
-      <input type="date" name="date" id="date" />
+        <!--Champ de saisie de la date-->
+        <label for="date">Date</label>
+        <input type="date" name="date" id="date" />
 
-      <!--Formulaire de saisie des notion-->
-      <fieldset class="notion">
-        <legend>Ajouter une notion</legend>
+        <!--Formulaire de saisie des notion-->
+        <fieldset class="notion">
+          <legend>Ajouter une notion</legend>
 
-        <label for="nom">Nom</label>
-        <input type="text" name="notion-nom" id="nom" />
+          <label for="nom">Nom</label>
+          <input type="text" name="notion-nom" id="nom" />
 
-        <label for="def">Définition</label>
-        <input type="text" name="notion-def" id="def" />
+          <label for="def">Définition</label>
+          <input type="text" name="notion-def" id="def" />
 
-        <input type="button" value="Ajouter" id="ajouter-notion" />
-      </fieldset>
+          <input
+            type="button"
+            value="Ajouter"
+            class="cta"
+            id="ajouter-notion"
+          />
+        </fieldset>
 
-      <div class="liste-notions">Liste des notions</div>
+        <div class="liste-notions">Liste des notions</div>
 
-      <!--Champ de saisie du contenu de la fiche-->
-      <label for="contenu">Contenu</label>
-      <textarea name="contenu" id="form-contenu" required></textarea>
+        <!--Champ de saisie du contenu de la fiche-->
+        <label for="contenu">Contenu</label>
+        <textarea name="contenu" id="form-contenu" required></textarea>
 
-      <!--Champ de saisie des ressources(lien,manuel...) de la fiche-->
-      <label for="ressource">Ressource</label>
-      <textarea name="ressource" id="form-ressource"></textarea>
+        <!--Champ de saisie des ressources(lien,manuel...) de la fiche-->
+        <label for="ressource">Ressource</label>
+        <textarea name="ressource" id="form-ressource"></textarea>
 
-      <!--Section devoir, permet d'ajouter des devoirs et de mettre en place des rappels-->
-      <fieldset class="devoirs">
-        <legend>Ajouter un devoirs</legend>
+        <!--Section devoir, permet d'ajouter des devoirs et de mettre en place des rappels-->
+        <fieldset class="devoirs">
+          <legend>Ajouter un devoirs</legend>
 
-        <label for="text-devoirs">Devoirs</label>
-        <input type="text" name="text-devoirs" id="devoirs" />
+          <label for="text-devoirs">Devoirs</label>
+          <input type="text" name="text-devoirs" id="devoirs" />
 
-        <label for="date-limite">Date limite</label>
-        <input type="date" name="date-limite" id="form-date-limite-devoir" />
+          <label for="date-limite">Date limite</label>
+          <input type="date" name="date-limite" id="form-date-limite-devoir" />
 
-        <label for="rappel-personalise">Rapel personalisé</label>
-        <input type="date" name="rappel-personalise" id="form-rappel-personalise-devoirs"/>
+          <label for="rappel-personalise">Rapel personalisé</label>
+          <input
+            type="date"
+            name="rappel-personalise"
+            id="form-rappel-personalise-devoirs"
+          />
 
-        <label for="rappel-auto">Rappeler 1 jour avant</label>
-        <input type="checkbox" name="rappel-auto" id="form-rappel-auto-devoirs" checked/>
+          <label for="rappel-auto">Rappeler 1 jour avant</label>
+          <input
+            type="checkbox"
+            name="rappel-auto"
+            id="form-rappel-auto-devoirs"
+            checked
+          />
 
-        <input type="button" value="Ajouter devoirs" id="btn-ajouter-devoirs" />
-      </fieldset>
+          <input
+            type="button"
+            value="Ajouter devoirs"
+            class="cta"
+            id="btn-ajouter-devoirs"
+          />
+        </fieldset>
 
-      <div class="liste-devoirs">Liste des devoirs</div>
-      <!--Champ de saisie du niveau de comphrénsion actuelle de la fiche-->
-      <label for="nv-comphrension">Niveau de comphrénsion</label>
-      <input type="range" step="1" min="1" max="5" name="nv-comphrension" id="form-nv-comphrension" required />
+        <div class="liste-devoirs">Liste des devoirs</div>
 
-      <!--Case important-->
-      <label for="important">Important</label>
-      <input type="checkbox" name="important" id="form-important" />
+        <!--Champ de saisie du niveau de comphrénsion actuelle de la fiche-->
+        <label for="nv-comprehension">Niveau de comphrénsion</label>
+        <input
+          type="range"
+          step="1"
+          min="1"
+          max="5"
+          value="5"
+          name="nv-comprehension"
+          id="form-nv-comprehension"
+        />
 
-      <!--Case a revoir-->
-      <label for="a-revoir">A revoir</label>
-      <input type="checkbox" name="a-revoir" id="form-a-revoir" />
+        <!--Case important-->
+        <label for="important">Important</label>
+        <input type="checkbox" name="important" id="form-important" />
 
-      <!--btn d'enregistrement de la fiche-->
-      <input type="submit" value="Enregistrer" id="btn-enregistrer" />
-    </form>
+        <!--Case a revoir-->
+        <label for="a-revoir">A revoir</label>
+        <input type="checkbox" name="a-revoir" id="form-a-revoir" />
+
+        <!--btn d'enregistrement de la fiche-->
+        <input
+          type="submit"
+          value="Enregistrer"
+          class="cta"
+          id="btn-enregistrer-form"
+        />
+      </form>
+      <button id="t" class="cta">renitialise localstorage</button>
+      <section>
+        <h2>Liste des fiches</h2>
+        <div class="liste-fiche"></div>
+      </section>
+    </main>
+    <footer></footer>
   </body>
 </html>
